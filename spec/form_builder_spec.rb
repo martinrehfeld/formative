@@ -4,13 +4,10 @@ require 'spec_helper'
 
 describe Formative::FormBuilder do
 
-  let(:template) { ActionView::Template.new('some/template.html.erb', 'template.html.erb', :handler, {}) }
+  include FormativeSpecHelper
+
+  let(:template) { mock_template }
   let(:model) { mock('model', :attribute => 'THE_VALUE') }
-  before(:each) do
-    class << template
-      include ActionView::Helpers
-    end
-  end
 
   subject { Formative::FormBuilder.new(:model, model, template, {}, Proc.new {}) }
 
