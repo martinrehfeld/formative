@@ -15,14 +15,10 @@ Jeweler::Tasks.new do |gem|
   gem.name = "formative"
   gem.homepage = "http://github.com/martinrehfeld/formative"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Simple yet useful form builder for Rails 2 and 3}
+  gem.description = %Q{Formative is an extraction of the custom form builder I used in my last couple of Rails projects. It is the simplest thing that could possibly work for me. YMMV.}
   gem.email = "martin.rehfeld@glnetworks.de"
   gem.authors = ["Martin Rehfeld"]
-  # Include your dependencies below. Runtime dependencies are required when using your gem,
-  # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
-  #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
-  #  gem.add_development_dependency 'rspec', '> 1.2.3'
 end
 Jeweler::RubygemsDotOrgTasks.new
 

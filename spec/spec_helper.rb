@@ -1,6 +1,13 @@
+# encoding: utf-8
+
+require 'rubygems'
+require 'bundler'
+Bundler.setup
+
+require 'action_view'
+
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
-require 'rspec'
 require 'formative'
 
 # Requires supporting files with custom matchers and macros, etc,
@@ -8,5 +15,4 @@ require 'formative'
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
 RSpec.configure do |config|
-  
 end
