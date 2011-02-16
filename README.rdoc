@@ -8,9 +8,7 @@ I am packaging this as a gem mainly for my personal use. So do not expect this t
 
 I am using Formative together with this initializer to enable inline error messages:
 
-  # make AV wrap errors with spans to avoid dumping divs into a <p> or <td>
-  # which is FAIL for html
-  # also show error messages next to form field labels
+  # Show error messages next to form field labels
   ActionView::Base.field_error_proc = Proc.new {|html_tag, instance_tag|
     if html_tag =~ /type="hidden"/ || !(html_tag =~ /<label/)
       html_tag
@@ -56,7 +54,7 @@ The generated markup would look something like this:
 
 You can customize the markup for each field with these options:
 
-   Option         Default         Possible-Value(s)
+   Option         Default         Possible Value(s)
    :wrapper       :p              Symbol to specify alternate tag or false to suppress wrapper
    :label         true            false to suppress label
    :required      false/auto      true will add "required" as a class to the label
