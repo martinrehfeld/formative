@@ -1,9 +1,71 @@
-= formative
+= Formative
 
-Description goes here.
+Formative is an extraction of the custom form builder I used in my last couple of Rails projects. It is the simplest thing that could possibly work for me. YMMV.
 
-== Contributing to formative
- 
+I am packaging this as a gem mainly for my personal use. So do not expect this to be any of well-documented, stable or refined.
+
+== Usage
+
+I am using Formative together with this initializer to enable inline error messages:
+
+  # make AV wrap errors with spans to avoid dumping divs into a <p> or <td>
+  # which is FAIL for html
+  # also show error messages next to form field labels
+  ActionView::Base.field_error_proc = Proc.new {|html_tag, instance_tag|
+    if html_tag =~ /type="hidden"/ || !(html_tag =~ /<label/)
+      html_tag
+    else
+      %(<span class="field-with-errors">#{html_tag} <span class="error-message">#{[instance_tag.error_message].flatten.first}</span></span>).html_safe
+    end
+  }
+
+Then just use `Formative::FormBuilder` as your builder -- here is an example form (haml):
+
+  = form_for :resource, :builder => Formative::FormBuilder do |f|
+    %fieldset
+      %legend Request Form
+
+      = f.text_field :bananas, :unit => 'kg'
+                     :hint => 'Enter the amount of bananas in kg you would like to eat right now'
+
+    .controls
+      = f.submit 'Request', :disable_with => 'Request'
+      %p.cancel= link_to 'Cancel', resource_path(@resource)
+
+The generated markup would look something like this:
+
+  <form action="/resource" method="post">
+    <fieldset>
+      <legend>Request Form</legend>
+
+      <p class="field text-field bananas">
+        <label for="resource_bananas">Bananas</label>
+        <input id="resource_bananas" name="resource[bananas]" type="text">
+        <span class="unit">kg</span>
+        <span class="hint">Enter the amount of bananas in kg you would like to eat right now</span>
+      </p>
+    </fieldset>
+
+    <div class="controls">
+      <input data-disable-with="Request" id="resource_submit" name="commit" type="submit" value="Request">
+      <p class="cancel">
+        <a href="/resource">Cancel</a>
+      </p>
+    </div>
+  </form>
+
+You can customize the markup for each field with these options:
+
+   Option         Default         Possible-Value(s)
+   :wrapper       :p              Symbol to specify alternate tag or false to suppress wrapper
+   :label         true            false to suppress label
+   :required      false/auto      true will add "required" as a class to the label
+   :label_class   auto            specify a class for the label directly
+   :hint          false           hint text
+   :unit          false           unit text
+
+== Contributing to formative (if you want to help make it a real Gem)
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
 * Fork the project
@@ -14,6 +76,4 @@ Description goes here.
 
 == Copyright
 
-Copyright (c) 2011 Martin Rehfeld. See LICENSE.txt for
-further details.
-
+Copyright (c) 2011 Martin Rehfeld. See MIT-LICENSE for further details.
