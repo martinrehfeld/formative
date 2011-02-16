@@ -18,5 +18,6 @@ pkg
 Gemfile.lock
 **.swp
 **.swo
+tags
 .DS_Store
 .rvmrc
