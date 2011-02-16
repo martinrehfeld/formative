@@ -2,8 +2,6 @@
 
 require 'spec_helper'
 
-require 'action_view'
-
 describe Formative::FormBuilder do
 
   let(:template) { ActionView::Template.new('some/template.html.erb', 'template.html.erb', :handler, {}) }
