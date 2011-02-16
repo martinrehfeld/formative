@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Martin Rehfeld"]
-  s.date = %q{2011-02-16}
+  s.date = %q{2011-02-17}
   s.description = %q{Formative is an extraction of the custom form builder I used in my last couple of Rails projects. It is the simplest thing that could possibly work for me. YMMV.}
   s.email = %q{martin.rehfeld@glnetworks.de}
   s.extra_rdoc_files = [
@@ -26,8 +26,9 @@ Gem::Specification.new do |s|
     "formative.gemspec",
     "init.rb",
     "lib/formative.rb",
+    "lib/formative/form_builder.rb",
     "rails/init.rb",
-    "spec/formative_spec.rb",
+    "spec/form_builder_spec.rb",
     "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/martinrehfeld/formative}
@@ -36,7 +37,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Simple yet useful form builder for Rails 2 and 3}
   s.test_files = [
-    "spec/formative_spec.rb",
+    "spec/form_builder_spec.rb",
     "spec/spec_helper.rb"
   ]
 
