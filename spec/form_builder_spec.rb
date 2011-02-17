@@ -17,8 +17,7 @@ describe Formative::FormBuilder do
     :collection_select => [ [Struct.new(:value, :text).new], :value, :text ],
     :password_field => [],
     :text_area => [],
-    :check_box => [],
-    :submit => []
+    :check_box => []
   }.each_pair do |builder_method, additional_args|
 
     describe "##{builder_method}" do

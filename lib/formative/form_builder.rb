@@ -13,11 +13,6 @@ module Formative
       content_tag(wrapper(options), super + field_label(field_name, options) + unit(options) + hint(options).html_safe, :class => wrapper_class('check_box', field_name))
     end
 
-    def submit(*args)
-      options = filter_custom_options(args.extract_options!)
-      super(args, options)
-    end
-
     private
 
       def content_tag(tag, content, *args)
