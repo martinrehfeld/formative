@@ -2,7 +2,7 @@
 
 Formative is an extraction of the custom form builder I used in my last couple of Rails projects. It is the simplest thing that could possibly work for me. YMMV.
 
-I am packaging this as a gem mainly for my personal use. So do not expect this to be any of well-documented, stable or refined.
+I am packaging this as a gem mainly for my personal use. So do not expect this to be any of well-documented, complete or refined.
 
 == Usage
 
