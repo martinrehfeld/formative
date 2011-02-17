@@ -23,7 +23,7 @@ Then just use `Formative::FormBuilder` as your builder -- here is an example for
     %fieldset
       %legend Request Form
 
-      = f.text_field :bananas, :unit => 'kg'
+      = f.text_field :bananas, :unit => 'kg',
                      :hint => 'Enter the amount of bananas in kg you would like to eat right now'
 
     .controls
