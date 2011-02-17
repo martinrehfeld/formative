@@ -7,46 +7,52 @@ describe Formative::FormBuilder do
   include FormativeSpecHelper
 
   let(:template) { mock_template }
-  let(:model) { mock('model', :attribute => 'THE_VALUE') }
+  let(:date_attribute) { mock('attribute', :day => 1, :month => 1, :year => 2000) }
+  let(:text_attribute) { 'THE_VALUE' }
+  let(:model) { mock('model', :attribute => attribute) }
 
   subject { Formative::FormBuilder.new(:model, model, template, {}, Proc.new {}) }
 
   {
-    :select => [ [] ],
     :text_field => [],
+    :select => [ [] ],
     :collection_select => [ [Struct.new(:value, :text).new], :value, :text ],
     :password_field => [],
     :text_area => [],
+    :date_select => [],
     :check_box => []
   }.each_pair do |builder_method, additional_args|
 
     describe "##{builder_method}" do
+      let(:attribute) { builder_method == :date_select ? date_attribute : text_attribute }
       let(:args) { [builder_method, :attribute].concat additional_args }
 
-      unless builder_method == :submit
-        it 'should output a default wrapper' do
-          subject.send(*args).should =~ /^<p.*\/p>$/
-        end
+      it 'should output a default wrapper' do
+        tag = subject.send(*args)
+        tag.should =~ /^<p/
+        tag.should =~ /<\/p\>$/
+      end
 
-        it 'should output a given wrapper' do
-          subject.send(*(args << {:wrapper => :div})).should =~ /^<div.*\/div>$/
-        end
+      it 'should output a given wrapper' do
+        tag = subject.send(*(args << {:wrapper => :div}))
+        tag.should =~ /^<div/
+        tag.should =~ /<\/div\>$/
+      end
 
-        it 'should add "field <method_name> <field_name>" as class of wrapper' do
-          subject.send(*args).should =~ /^<p class="field #{builder_method.to_s.dasherize} attribute"/
-        end
+      it 'should add "field <method_name> <field_name>" as class of wrapper' do
+        subject.send(*args).should =~ /^<p class="field #{builder_method.to_s.dasherize} attribute"/
+      end
 
-        it 'should output a proper label' do
-          subject.send(*args).should =~ /<label for="model_attribute".*\/label>/
-        end
+      it 'should output a proper label' do
+        subject.send(*args).should =~ /<label for="model_attribute".*\/label>/
+      end
 
-        it 'should output a given unit' do
-          subject.send(*(args << {:unit => 'the unit'})).should =~ /<span class="unit">the unit<\/span>/
-        end
+      it 'should output a given unit' do
+        subject.send(*(args << {:unit => 'the unit'})).should =~ /<span class="unit">the unit<\/span>/
+      end
 
-        it 'should output a given hint' do
-          subject.send(*(args << {:hint => 'additional information'})).should =~ /<span class="hint">additional information<\/span>/
-        end
+      it 'should output a given hint' do
+        subject.send(*(args << {:hint => 'additional information'})).should =~ /<span class="hint">additional information<\/span>/
       end
 
       context ":wrapper => false" do
