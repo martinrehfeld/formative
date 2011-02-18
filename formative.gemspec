@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Martin Rehfeld"]
-  s.date = %q{2011-02-17}
+  s.date = %q{2011-02-18}
   s.description = %q{Formative is an extraction of the custom form builder I used in my last couple of Rails projects. It is the simplest thing that could possibly work for me. YMMV.}
   s.email = %q{martin.rehfeld@glnetworks.de}
   s.extra_rdoc_files = [
